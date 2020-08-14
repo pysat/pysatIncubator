@@ -43,6 +43,6 @@ Another way to use the instruments in an external repository is to register the 
 ```
 import pysat
 
-pysat.utils.registry.register(pysatIncubator.instruments.champ_star)
+pysat.utils.registry.register('pysatIncubator.instruments.champ_star')
 champ = pysat.Instrument('champ', 'star')
 ```
