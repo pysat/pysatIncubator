@@ -52,7 +52,7 @@ import numpy as np
 import pandas as pds
 
 import pysat
-from pysat.instruments.methods import demeter
+from pysatIncubator.instruments.methods import demeter
 
 logger = logging.getLogger(__name__)
 
