@@ -38,3 +38,11 @@ from pysatIncubator.instruments import champ_star
 
 champ = pysat.Instrument(inst_module=champ_star)
 ```
+Another way to use the instruments in an external repository is to register the instruments.  This only needs to be done the first time you load an instrument.  Afterward, pysat will identify them using the `platform` and `name` keywords.
+
+```
+import pysat
+
+pysat.utils.registry.register(pysatIncubator.instruments.champ_star)
+champ = pysat.Instrument('champ', 'star')
+```
