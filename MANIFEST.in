@@ -1,0 +1,13 @@
+include *.py
+include *.f
+include *.c
+recursive-include pysatIncubator *.py
+include *.md
+include description.txt
+include LICENSE
+include pysatIncubator/version.txt
+prune pysatIncubator/tests
+prune docs
+prune demo
+exclude *.pdf
+exclude *.png
