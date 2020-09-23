@@ -47,7 +47,7 @@ platform = 'superdarn'
 name = 'grdex'
 tags = {'north': '',
         'south': ''}
-sat_ids = {'': ['north', 'south']}
+inst_ids = {'': ['north', 'south']}
 _test_dates = {'': {'north': dt.datetime(2009, 1, 1),
                     'south': dt.datetime(2009, 1, 1)}}
 _test_download = {'': {kk: False for kk in tags.keys()}}
@@ -91,7 +91,7 @@ def init(self):
     return
 
 
-def list_remote_files(tag, sat_id, data_path=None, format_str=None):
+def list_remote_files(tag, inst_id, data_path=None, format_str=None):
     """Lists remote files available for SuperDARN.
 
     Note
@@ -105,7 +105,7 @@ def list_remote_files(tag, sat_id, data_path=None, format_str=None):
     tag : string or NoneType
         Denotes type of file to load.  Accepted types are <tag strings>.
         (default=None)
-    sat_id : string or NoneType
+    inst_id : string or NoneType
         Specifies the satellite ID for a constellation.  Not used.
         (default=None)
 
@@ -138,7 +138,7 @@ def list_remote_files(tag, sat_id, data_path=None, format_str=None):
     # the init function above is used to reset the
     # lost_remote_files method with one where the
     # data path and format_str are set
-    local_files = list_files(tag, sat_id, data_path, format_str)
+    local_files = list_files(tag, inst_id, data_path, format_str)
     # iterating directly since pandas is complaining about periods
     # between different between indexes
     for time, fname in local_files.iteritems():
@@ -146,7 +146,7 @@ def list_remote_files(tag, sat_id, data_path=None, format_str=None):
     return remote_files
 
 
-def list_files(tag='north', sat_id=None, data_path=None, format_str=None):
+def list_files(tag='north', inst_id=None, data_path=None, format_str=None):
     """Return a Pandas Series of every file for chosen satellite data
 
     Parameters
@@ -154,7 +154,7 @@ def list_files(tag='north', sat_id=None, data_path=None, format_str=None):
     tag : string
         Denotes type of file to load.  Accepted types are 'north' and 'south'.
         (default='north')
-    sat_id : string or NoneType
+    inst_id : string or NoneType
         Specifies the satellite ID for a constellation.  Not used.
         (default=None)
     data_path : string or NoneType
@@ -187,7 +187,7 @@ def list_files(tag='north', sat_id=None, data_path=None, format_str=None):
         return pysat.Files.from_os(data_path=data_path, format_str=format_str)
 
 
-def load(fnames, tag=None, sat_id=None):
+def load(fnames, tag=None, inst_id=None):
     import davitpy
     if len(fnames) <= 0:
         return pds.DataFrame(None), pysat.Meta(None)
@@ -274,7 +274,7 @@ def clean(self):
     return
 
 
-def download(date_array, tag, sat_id, data_path, user=None, password=None):
+def download(date_array, tag, inst_id, data_path, user=None, password=None):
     """
     Download SuperDARN data from Virginia Tech organized for loading by pysat.
 

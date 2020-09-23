@@ -54,7 +54,7 @@ tags = {'indices': 'SMU and SML indices',
         '': 'magnetometer measurements',
         'all': 'magnetometer measurements and indices',
         'stations': 'magnetometer stations'}
-sat_ids = {'': tags.keys()}
+inst_ids = {'': tags.keys()}
 _test_dates = {'': {kk: dt.datetime(2009, 1, 1) for kk in tags.keys()}}
 _test_download = {'': {kk: False for kk in tags.keys()}}
 
@@ -95,7 +95,7 @@ def init(self):
     return
 
 
-def list_remote_files(tag='', sat_id=None, data_path=None, format_str=None,
+def list_remote_files(tag='', inst_id=None, data_path=None, format_str=None,
                       year=None, month=None, Day=None):
     """Lists remote files available for SuperMAG.
 
@@ -113,7 +113,7 @@ def list_remote_files(tag='', sat_id=None, data_path=None, format_str=None,
         Denotes type of file to load.  Accepted types are 'indices', 'all',
         'stations', and '' (for just magnetometer measurements).
         (default='')
-    sat_id : string or NoneType
+    inst_id : string or NoneType
         Specifies the satellite ID for a constellation.  Not used.
         (default=None)
     data_path : string or NoneType
@@ -172,13 +172,13 @@ def list_remote_files(tag='', sat_id=None, data_path=None, format_str=None,
     # data path and format_str are set
     # iterating directly since pandas is complaining about periods
     # between different between indexes
-    local_files = list_files(tag, sat_id, data_path, format_str)
+    local_files = list_files(tag, inst_id, data_path, format_str)
     for time, fname in local_files.iteritems():
         remote_files.loc[time] = fname
     return remote_files
 
 
-def list_files(tag='', sat_id=None, data_path=None, format_str=None):
+def list_files(tag='', inst_id=None, data_path=None, format_str=None):
     """Return a Pandas Series of every file for chosen SuperMAG data
 
     Parameters
@@ -186,7 +186,7 @@ def list_files(tag='', sat_id=None, data_path=None, format_str=None):
     tag : string
         Denotes type of file to load.  Accepted types are 'indices', 'all',
         'stations', and '' (for just magnetometer measurements). (default='')
-    sat_id : string or NoneType
+    inst_id : string or NoneType
         Specifies the satellite ID for a constellation.  Not used.
         (default=None)
     data_path : string or NoneType
@@ -252,7 +252,7 @@ def list_files(tag='', sat_id=None, data_path=None, format_str=None):
         return pysat.Files.from_os(data_path=data_path, format_str=format_str)
 
 
-def load(fnames, tag='', sat_id=None):
+def load(fnames, tag='', inst_id=None):
     """ Load the SuperMAG files
 
     Parameters
@@ -262,7 +262,7 @@ def load(fnames, tag='', sat_id=None):
     tag : str
         Denotes type of file to load.  Accepted types are 'indices', 'all',
         'stations', and '' (for just magnetometer measurements). (default='')
-    sat_id : str or NoneType
+    inst_id : str or NoneType
         Satellite ID for constellations, not used. (default=None)
 
     Returns
@@ -690,7 +690,7 @@ def clean(supermag):
     return
 
 
-def download(date_array, tag, sat_id, data_path):
+def download(date_array, tag, inst_id, data_path):
     """Routine to download SuperMAG data
 
     Parameters

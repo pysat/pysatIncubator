@@ -11,7 +11,7 @@ import pysat
 logger = logging.getLogger(__name__)
 
 
-def download(date_array, tag, sat_id, data_path=None, user=None,
+def download(date_array, tag, inst_id, data_path=None, user=None,
              password=None):
     """ Download
 
@@ -22,7 +22,7 @@ def download(date_array, tag, sat_id, data_path=None, user=None,
     return
 
 
-def list_remote_files(tag, sat_id):
+def list_remote_files(tag, inst_id):
     """Lists files available for Demeter.
 
     Note
@@ -36,7 +36,7 @@ def list_remote_files(tag, sat_id):
     tag : string or NoneType
         Denotes type of file to load.  Accepted types are <tag strings>.
         (default=None)
-    sat_id : string or NoneType
+    inst_id : string or NoneType
         Specifies the satellite ID for a constellation.  Not used.
         (default=None)
 

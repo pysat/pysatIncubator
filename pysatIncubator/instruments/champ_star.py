@@ -11,7 +11,7 @@ name
     'star'
 tag
     None supported
-sat_id
+inst_id
     None supported
 
 
@@ -37,7 +37,7 @@ import pysat
 platform = 'champ'
 name = 'star'
 tags = {'': ''}
-sat_ids = {'': ['']}
+inst_ids = {'': ['']}
 _test_dates = {'': {'': dt.datetime(2007, 1, 1)}}
 _test_download = {'': {'': False}}
 
@@ -60,7 +60,7 @@ def init(self):
     return
 
 
-def list_files(tag='', sat_id=None, data_path=None, format_str=None):
+def list_files(tag='', inst_id=None, data_path=None, format_str=None):
     """Return a Pandas Series of every file for chosen satellite data
 
     Parameters
@@ -69,7 +69,7 @@ def list_files(tag='', sat_id=None, data_path=None, format_str=None):
         Denotes type of file to load.  Accepted types are '' and 'ascii'.
         If '' is specified, the primary data type (ascii) is loaded.
         (default='')
-    sat_id : string or NoneType
+    inst_id : string or NoneType
         Specifies the satellite ID for a constellation.  Not used.
         (default=None)
     data_path : string or NoneType
@@ -100,7 +100,7 @@ def list_files(tag='', sat_id=None, data_path=None, format_str=None):
         return pysat.Files.from_os(data_path=data_path, format_str=format_str)
 
 
-def load(fnames, tag=None, sat_id=None):
+def load(fnames, tag=None, inst_id=None):
     """Load CHAMP STAR files
 
     Parameters
@@ -109,7 +109,7 @@ def load(fnames, tag=None, sat_id=None):
         Series of filenames
     tag : str or NoneType
         tag or None (default=None)
-    sat_id : str or NoneType
+    inst_id : str or NoneType
         satellite id or None (default=None)
 
     Returns
@@ -217,7 +217,7 @@ def load(fnames, tag=None, sat_id=None):
     return data, meta
 
 
-def download(date_array, tag, sat_id, data_path, user=None, password=None):
+def download(date_array, tag, inst_id, data_path, user=None, password=None):
     """Routine to download CHAMP STAR data
 
     Parameters
