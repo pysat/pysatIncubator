@@ -23,7 +23,7 @@ name
     'iap'
 tag
     'survey' or 'burst'
-sat_id
+inst_id
     None supported
 
 Example
@@ -60,7 +60,7 @@ platform = 'demeter'
 name = 'iap'
 tags = {'survey': 'Survey mode',
         'burst': 'Burst mode'}
-sat_ids = {'': list(tags.keys())}
+inst_ids = {'': list(tags.keys())}
 _test_dates = {'': {'survey': dt.datetime(2010, 1, 1)}}
 _test_download = {'': {kk: False for kk in tags.keys()}}
 
@@ -84,7 +84,7 @@ def init(self):
     return
 
 
-def list_files(tag="survey", sat_id='', data_path=None, format_str=None,
+def list_files(tag="survey", inst_id='', data_path=None, format_str=None,
                index_start_time=True):
     """Return a Pandas Series of every file for DEMETER IAP satellite data
 
@@ -93,7 +93,7 @@ def list_files(tag="survey", sat_id='', data_path=None, format_str=None,
     tag : string
         Denotes type of file to load.  Accepted types are 'survey'; 'burst'
         will be added in the future.  (default='survey')
-    sat_id : string or NoneType
+    inst_id : string or NoneType
         Specifies the satellite ID for a constellation.  Not used.
         (default='')
     data_path : string or NoneType
@@ -128,7 +128,7 @@ def list_files(tag="survey", sat_id='', data_path=None, format_str=None,
     return pysat.Files.from_os(data_path=data_path, format_str=format_str)
 
 
-def load(fnames, tag='survey', sat_id=''):
+def load(fnames, tag='survey', inst_id=''):
     """ Load DEMETER IAP data
 
     Parameters
@@ -138,7 +138,7 @@ def load(fnames, tag='survey', sat_id=''):
     tag : string
         Denotes type of file to load.  Accepted types are 'survey'; 'burst'
         will be added in the future.  (default='survey')
-    sat_id : string or NoneType
+    inst_id : string or NoneType
         Specifies the satellite ID for a constellation.  Not used.
         (default='')
 
