@@ -14,8 +14,6 @@ except ImportError:
     pass
 import pysatMagVect
 
-from pysatIncubator.methods import spacecraft as mm_sc
-
 
 # TODO add checks for ECEF and import rest of changes here
 pyglow_warning = ' '.join(['pyglow must be installed to use this',
@@ -464,13 +462,5 @@ def project_hwm_onto_sc(inst):
     inst['total_wind_x'] = get_wind_comp(inst, direction='x')
     inst['total_wind_y'] = get_wind_comp(inst, direction='y')
     inst['total_wind_z'] = get_wind_comp(inst, direction='z')
-
-    mm_sc.project_ecef_vector_onto_sc(inst, 'total_wind_x', 'total_wind_y',
-                                      'total_wind_z', 'sim_wind_sc_x',
-                                      'sim_wind_sc_y', 'sim_wind_sc_z')
-
-    inst.meta['sim_wind_sc_x'] = get_wind_meta('x')
-    inst.meta['sim_wind_sc_y'] = get_wind_meta('y')
-    inst.meta['sim_wind_sc_z'] = get_wind_meta('z')
 
     return
