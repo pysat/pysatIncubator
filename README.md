@@ -47,3 +47,20 @@ import pysat
 pysat.utils.registry.register('pysatIncubator.instruments.champ_star')
 champ = pysat.Instrument('champ', 'star')
 ```
+
+A note on empirical models
+--------------------------
+pysatIncubator allows users to interact with a number of upper atmospheric empirical models through the [pyglow](https://github.com/timduly4/pyglow) package.  However, pyglow currently requires manual install through git.  While pysatIncubator can be installed and used without pyglow, it should be installed by the user to access the pyglow methods.  Please follow the install instructions at https://github.com/timduly4/pyglow.
+
+The methods that run empirical models can also be exported to any pysat instrument. For instance, to add thermal plasma predictions from the IRI model to the C/NOFS IVM instrument, one can invoke
+
+```
+import pysat
+from pysatIncubator.methods import empirical
+
+ivm = pysat.Instrument(platform='cnofs', name='ivm')
+ivm.custom.attach(empirical.add_iri_thermal_plasma, 'modify',
+               glat_label='glat',
+               glong_label='glon', alt_label='altitude')
+```
+Once the custom function is added, the model will automatically be run when the dataset is loaded.
