@@ -76,10 +76,9 @@ def add_iri_thermal_plasma(inst, glat_label='glat', glong_label='glong',
             iri['ion_temp'] = pt.Ti
             iri['e_temp'] = pt.Te
             iri['ion_dens'] = pt.ni['O+'] + pt.ni['H+'] + pt.ni['HE+']
-            # pt.ne - pt.ni['NO+'] - pt.ni['O2+'] - pt.ni['HE+']
-            iri['frac_dens_o'] = pt.ni['O+']/iri['ion_dens']
-            iri['frac_dens_h'] = pt.ni['H+']/iri['ion_dens']
-            iri['frac_dens_he'] = pt.ni['HE+']/iri['ion_dens']
+            iri['frac_dens_o'] = pt.ni['O+'] / iri['ion_dens']
+            iri['frac_dens_h'] = pt.ni['H+'] / iri['ion_dens']
+            iri['frac_dens_he'] = pt.ni['HE+'] / iri['ion_dens']
             iri_params.append(iri)
         iri = pds.DataFrame(iri_params)
         iri.index = inst.data.index
@@ -178,27 +177,33 @@ def add_igrf(inst, glat_label='glat', glong_label='glong', alt_label='alt'):
     inst.meta['B'] = {'units': 'nT',
                       'desc': 'Total geomagnetic field from IGRF.'}
     inst.meta['B_east'] = {'units': 'nT',
-                           'desc': 'Geomagnetic field from IGRF expressed ' +
-                           'using the East/North/Up (ENU) basis.'}
+                           'desc': ' '.join(('Geomagnetic field from IGRF',
+                                             'expressed using the',
+                                             'East/North/Up (ENU) basis.'))}
     inst.meta['B_north'] = {'units': 'nT',
-                            'desc': 'Geomagnetic field from IGRF expressed ' +
-                            'using the East/North/Up (ENU) basis.'}
+                            'desc': ' '.join(('Geomagnetic field from IGRF',
+                                              'expressed using the',
+                                              'East/North/Up (ENU) basis.'))}
     inst.meta['B_up'] = {'units': 'nT',
-                         'desc': 'Geomagnetic field from IGRF expressed ' +
-                         'using the East/North/Up (ENU) basis.'}
+                         'desc': ' '.join(('Geomagnetic field from IGRF',
+                                           'expressed using the East/North/Up',
+                                           '(ENU) basis.'))}
 
     inst.meta['B_ecef_x'] = {'units': 'nT',
-                             'desc': 'Geomagnetic field from IGRF expressed ' +
-                             'using the Earth Centered Earth Fixed (ECEF) ' +
-                             'basis.'}
+                             'desc': ' '.join(('Geomagnetic field from IGRF',
+                                               'expressed using the Earth',
+                                               'Centered Earth Fixed (ECEF)',
+                                               'basis.'))}
     inst.meta['B_ecef_y'] = {'units': 'nT',
-                             'desc': 'Geomagnetic field from IGRF expressed ' +
-                             'using the Earth Centered Earth Fixed (ECEF) ' +
-                             'basis.'}
+                             'desc': ' '.join(('Geomagnetic field from IGRF',
+                                               'expressed using the Earth',
+                                               'Centered Earth Fixed (ECEF)',
+                                               'basis.'))}
     inst.meta['B_ecef_z'] = {'units': 'nT',
-                             'desc': 'Geomagnetic field from IGRF expressed ' +
-                             'using the Earth Centered Earth Fixed (ECEF) ' +
-                             'basis.'}
+                             'desc': ' '.join(('Geomagnetic field from IGRF',
+                                               'expressed using the Earth',
+                                               'Centered Earth Fixed (ECEF)',
+                                               'basis.'))}
     return
 
 
@@ -268,29 +273,29 @@ def add_msis(inst, glat_label='glat', glong_label='glong', alt_label='alt'):
 
     # metadata
     inst.meta['Nn'] = {'units': 'cm^-3',
-                       'desc': 'Total neutral number particle density ' +
-                       'from MSIS.'}
+                       'desc': ' '.join(('Total neutral number particle',
+                                         'density from MSIS.'))}
     inst.meta['Nn_H'] = {'units': 'cm^-3',
-                         'desc': 'Total hydrogen number particle density ' +
-                         'from MSIS.'}
+                         'desc': ' '.join(('Total hydrogen number particle',
+                                           'density from MSIS.'))}
     inst.meta['Nn_He'] = {'units': 'cm^-3',
-                          'desc': 'Total helium number particle density ' +
-                          'from MSIS.'}
+                          'desc': ' '.join(('Total helium number particle',
+                                            'density from MSIS.'))}
     inst.meta['Nn_N'] = {'units': 'cm^-3',
-                         'desc': 'Total nitrogen number particle density ' +
-                         'from MSIS.'}
+                         'desc': ' '.join(('Total nitrogen number particle',
+                                           'density from MSIS.'))}
     inst.meta['Nn_N2'] = {'units': 'cm^-3',
-                          'desc': 'Total N2 number particle density ' +
-                          'from MSIS.'}
+                          'desc': ' '.join(('Total N2 number particle density',
+                                            'from MSIS.'))}
     inst.meta['Nn_O'] = {'units': 'cm^-3',
-                         'desc': 'Total oxygen number particle density ' +
-                         'from MSIS.'}
+                         'desc': ' '.join(('Total oxygen number particle',
+                                           'density from MSIS.'))}
     inst.meta['Nn_O2'] = {'units': 'cm^-3',
-                          'desc': 'Total O2 number particle density ' +
-                          'from MSIS.'}
+                          'desc': ' '.join(('Total O2 number particle density',
+                                            'from MSIS.'))}
     inst.meta['Nn_Ar'] = {'units': 'cm^-3',
-                          'desc': 'Total argon number particle density ' +
-                          'from MSIS.'}
+                          'desc': ' '.join(('Total argon number particle',
+                                            'density from MSIS.'))}
     inst.meta['Tn_msis'] = {'units': 'K',
                             'desc': 'Neutral temperature from MSIS.'}
 
@@ -362,8 +367,8 @@ def add_hwm_winds_and_ecef_vectors(inst, glat_label='glat',
     # zonal wind: east - west; positive east
     # EW direction is tangent to XY location of S/C in ECEF coordinates
     mag = np.sqrt(inst['position_ecef_x']**2 + inst['position_ecef_y']**2)
-    inst['unit_zonal_wind_ecef_x'] = -inst['position_ecef_y']/mag
-    inst['unit_zonal_wind_ecef_y'] = inst['position_ecef_x']/mag
+    inst['unit_zonal_wind_ecef_x'] = -inst['position_ecef_y'] / mag
+    inst['unit_zonal_wind_ecef_y'] = inst['position_ecef_x'] / mag
     inst['unit_zonal_wind_ecef_z'] = 0 * inst['position_ecef_x']
 
     # calculate meridional unit vector in ECEF
@@ -448,8 +453,8 @@ def project_hwm_onto_sc(inst):
         unit_zon = 'unit_zonal_wind_ecef_' + direction
         unit_mer = 'unit_mer_wind_ecef_' + direction
 
-        return (inst['zonal_wind']*inst[unit_zon] +
-                inst['meridional_wind']*inst[unit_mer])
+        return (inst['zonal_wind'] * inst[unit_zon]
+                + inst['meridional_wind'] * inst[unit_mer])
 
     def get_wind_meta(coord='x'):
         dict = {'units': 'm/s',
