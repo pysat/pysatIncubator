@@ -14,13 +14,13 @@ except ImportError:
     pass
 import pysatMagVect
 
-from pysatMissions.methods import spacecraft as mm_sc
+from pysatIncubator.methods import spacecraft as mm_sc
 
 
 # TODO add checks for ECEF and import rest of changes here
 pyglow_warning = ' '.join(['pyglow must be installed to use this',
                            'function.  See instructions at',
-                           'https://github.com/pysat/pysatMissions'])
+                           'https://github.com/pysat/pysatIncubator'])
 
 
 def add_iri_thermal_plasma(inst, glat_label='glat', glong_label='glong',
