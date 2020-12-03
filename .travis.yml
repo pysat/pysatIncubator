@@ -39,6 +39,10 @@ install:
   - git checkout develop-3
   - python setup.py install
   - export PYTHONPATH=$PYTHONPATH:$(pwd)
+
+  # Install pysatMagVect after pysat
+  - pip install pysatMagVect >/dev/null
+
   # set up data directory
   - mkdir /home/travis/build/pysatData
   - cd ../pysatIncubator
