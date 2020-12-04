@@ -11,7 +11,7 @@ import warnings
 try:
     from pyglow.pyglow import Point
 except ImportError:
-    # Warnings thrown elsewhere if users try to use pyglow function without a pyglow install
+    # Warnings thrown elsewhere if users try to use functions without a pyglow install
     pass
 import pysatMagVect
 
