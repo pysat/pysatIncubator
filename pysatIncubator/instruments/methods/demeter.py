@@ -96,6 +96,10 @@ def load_general_header(fhandle):
         'calibration file version', and 'calibration file subversion',
         'data names', 'data units'
 
+    Note
+    ----
+    metadata here should be updated to use the new labels class in pysat 3.0.0
+
     """
     import codecs  # ensures encode is python 2/3 compliant
 
