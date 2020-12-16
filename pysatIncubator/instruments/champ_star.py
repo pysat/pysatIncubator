@@ -208,11 +208,11 @@ def load(fnames, tag=None, inst_id=None):
 
     # Because the native dtype declaration interferred with datetime indexing,
     # define the data types here.  Also set the meta data
-    for h in hdata:
-        col = champ_labels[h]
+    for hval in hdata:
+        col = champ_labels[hval]
         data[col].astype(champ_dtypes[col])
         meta[col] = {meta.labels.units: champ_units[col],
-                     meta.labels.name: h}
+                     meta.labels.name: hval}
 
     # Return data frame and metadata object
     return data, meta
