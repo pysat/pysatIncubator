@@ -211,7 +211,8 @@ def load(fnames, tag=None, inst_id=None):
     for h in hdata:
         col = champ_labels[h]
         data[col].astype(champ_dtypes[col])
-        meta[col] = {"units": champ_units[col], "long_name": h}
+        meta[col] = {meta.labels.units: champ_units[col],
+                     meta.labels.name: h}
 
     # Return data frame and metadata object
     return data, meta
