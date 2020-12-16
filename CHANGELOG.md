@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.x.y] - 2020-12-3
 - Added pyglow interface, migrated from pysatMissions
+- Update metadata standards
 
 ## [0.0.1] - 2020-08-13
 - initial port of existing routines from pysat
