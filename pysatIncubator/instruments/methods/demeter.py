@@ -608,7 +608,8 @@ def set_metadata(name, meta_dict):
                 ll = long_name[cc]
 
             # Assign the data units, long names
-            meta[cc] = {'units': meta_dict['data units'][cc], 'long_name': ll}
+            meta[cc] = {meta.labels.units: meta_dict['data units'][cc],
+                        meta.labels.name: ll}
 
         mkeys = list(meta_dict.keys())
         mkeys.pop(mkeys.index('data names'))
