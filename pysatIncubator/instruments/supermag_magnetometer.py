@@ -310,7 +310,7 @@ def load(fnames, tag='', inst_id=None):
     if len(data.columns) > 0:
         meta = pysat.Meta()
         for cc in data.columns:
-            meta[cc] = update_smag_metadata(cc)
+            meta[cc] = update_smag_metadata(meta, cc)
 
         meta.info = {'baseline': format_baseline_list(baseline)}
     else:
@@ -541,11 +541,13 @@ def load_ascii_data(fname, tag):
     return data, baseline
 
 
-def update_smag_metadata(col_name):
+def update_smag_metadata(meta, col_name):
     """Update SuperMAG metadata
 
     Parameters
     -----------
+    meta : pysat.Meta()
+        Meta object to be passed through
     col_name : str
         Data column name
 
@@ -615,9 +617,8 @@ def update_smag_metadata(col_name):
     ackn += "cooperation with Geoscience Australia, PI Marina Costelloe; "
     ackn += "SuperMAG, PI Jesper W. Gjerloev."
 
-    col_dict = {'units': smag_units[col_name],
-                'long_name': smag_name[col_name],
-                'acknowledgements': ackn}
+    col_dict = {meta.labels.units: smag_units[col_name],
+                meta.labels.name: smag_name[col_name]}
 
     return col_dict
 

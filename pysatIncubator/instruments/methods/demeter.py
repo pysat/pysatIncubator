@@ -90,11 +90,15 @@ def load_general_header(fhandle):
         List of data values containing: P field,
         Number of days from 01/01/1950, number of miliseconds in the day,
         UT as datetime, Orbit number, downward (False) upward (True) indicator
-    meta : dict
+    meta_dict : dict
         Dictionary with meta data for keys: 'telemetry station',
         'software processing version', 'software processing subversion',
         'calibration file version', and 'calibration file subversion',
         'data names', 'data units'
+
+    Note
+    ----
+    metadata here should be re-evaluated based on changes to pysat 3.0.0
 
     """
     import codecs  # ensures encode is python 2/3 compliant
@@ -122,23 +126,23 @@ def load_general_header(fhandle):
             int(codecs.encode(chunk[22:24], 'hex'), 16),  # Orbit number
             bool(int(codecs.encode(chunk[24:26], 'hex'), 16))]  # Orbit type
 
-    meta = {'telemetry station': chunk[26:34],
-            'software processing version': int(codecs.encode(chunk[34:35],
-                                                             'hex'), 16),
-            'software processing subversion': int(codecs.encode(chunk[35:36],
-                                                                'hex'), 16),
-            'calibration file version': int(codecs.encode(chunk[36:37], 'hex'),
-                                            16),
-            'calibration file subversion': int(codecs.encode(chunk[37:38],
-                                                             'hex'), 16),
-            'data names': ['P_field', 'epoch_time', 'time_of_day', 'UT',
-                           'orbit_number', 'orbit_type'],
-            'data units': {'P_field': 'N/A',
-                           'epoch_time': 'days since 1/1/1950',
-                           'time_of_day': 'ms', 'UT': 'datetime',
-                           'orbit_number': 'N/A', 'orbit_type': 'N/A'}}
+    meta_dict = {'telemetry station': chunk[26:34],
+                 'software processing version': int(codecs.encode(chunk[34:35],
+                                                                  'hex'), 16),
+                 'software processing subversion':
+                 int(codecs.encode(chunk[35:36], 'hex'), 16),
+                 'calibration file version':
+                 int(codecs.encode(chunk[36:37], 'hex'), 16),
+                 'calibration file subversion':
+                 int(codecs.encode(chunk[37:38], 'hex'), 16),
+                 'data names': ['P_field', 'epoch_time', 'time_of_day', 'UT',
+                                'orbit_number', 'orbit_type'],
+                 'data units': {'P_field': 'N/A',
+                                'epoch_time': 'days since 1/1/1950',
+                                'time_of_day': 'ms', 'UT': 'datetime',
+                                'orbit_number': 'N/A', 'orbit_type': 'N/A'}}
 
-    return data, meta
+    return data, meta_dict
 
 
 def load_location_parameters(fhandle):
@@ -159,7 +163,7 @@ def load_location_parameters(fhandle):
         N conj point at 110 km, geoc lat of S conj point at 110 km, geoc
         lon of S conj point at 110 km, components of magnetic field at sat
         point, proton gyrofreq at sat point, solar position in geog coords
-    meta : dict
+    meta_dict : dict
         Dictionary with meta data for keys: 'software processing version',
         'software processing subversion', 'data names', 'data units'
 
@@ -195,40 +199,41 @@ def load_location_parameters(fhandle):
             bytes_to_float(chunk[80:84]),  # Ys in geographic coordinate system
             bytes_to_float(chunk[84:88])]  # Zs in geographic coordinate system
 
-    meta = {'software processing version': int(codecs.encode(chunk[88:89],
-                                                             'hex'), 16),
-            'software processing subversion': int(codecs.encode(chunk[89:90],
-                                                                'hex'), 16),
-            'data names': ['glat', 'glon', 'altitude', 'LT', 'mlat', 'mlon',
-                           'MLT', 'ilat', 'L', 'glat_conj', 'glon_conj',
-                           'glat_conj_N_110km', 'glon_conj_N_110km',
-                           'glat_conj_S_110km', 'glon_conj_S_110km',
-                           'mag_comp_1', 'mag_comp_2', 'mag_comp_3',
-                           'proton_gyrofreq', 'Xs', 'Ys', 'Zs'],
-            'data units': {'glat': 'degrees',
-                           'glon': 'degrees',
-                           'altitude': 'km',
-                           'LT': 'h',
-                           'mlat': 'degrees',
-                           'mlon': 'degrees',
-                           'MLT': 'h',
-                           'ilat': 'degrees',
-                           'L': 'Earth_Radii',
-                           'glat_conj': 'degrees',
-                           'glon_conj': 'degrees',
-                           'glat_conj_N_110km': 'degrees',
-                           'glon_conj_N_110km': 'degrees',
-                           'glat_conj_S_110km': 'degrees',
-                           'glon_conj_S_110km': 'degrees',
-                           'mag_comp_1': 'nT',
-                           'mag_comp_2': 'nT',
-                           'mag_comp_3': 'nT',
-                           'proton_gyrofreq': 'Hz',
-                           'Xs': 'N/A',
-                           'Ys': 'N/A',
-                           'Zs': 'N/A'}}
+    meta_dict = {'software processing version': int(codecs.encode(chunk[88:89],
+                                                                  'hex'), 16),
+                 'software processing subversion':
+                 int(codecs.encode(chunk[89:90], 'hex'), 16),
+                 'data names': ['glat', 'glon', 'altitude', 'LT', 'mlat',
+                                'mlon', 'MLT', 'ilat', 'L', 'glat_conj',
+                                'glon_conj', 'glat_conj_N_110km',
+                                'glon_conj_N_110km', 'glat_conj_S_110km',
+                                'glon_conj_S_110km', 'mag_comp_1', 'mag_comp_2',
+                                'mag_comp_3', 'proton_gyrofreq', 'Xs', 'Ys',
+                                'Zs'],
+                 'data units': {'glat': 'degrees',
+                                'glon': 'degrees',
+                                'altitude': 'km',
+                                'LT': 'h',
+                                'mlat': 'degrees',
+                                'mlon': 'degrees',
+                                'MLT': 'h',
+                                'ilat': 'degrees',
+                                'L': 'Earth_Radii',
+                                'glat_conj': 'degrees',
+                                'glon_conj': 'degrees',
+                                'glat_conj_N_110km': 'degrees',
+                                'glon_conj_N_110km': 'degrees',
+                                'glat_conj_S_110km': 'degrees',
+                                'glon_conj_S_110km': 'degrees',
+                                'mag_comp_1': 'nT',
+                                'mag_comp_2': 'nT',
+                                'mag_comp_3': 'nT',
+                                'proton_gyrofreq': 'Hz',
+                                'Xs': 'N/A',
+                                'Ys': 'N/A',
+                                'Zs': 'N/A'}}
 
-    return data, meta
+    return data, meta_dict
 
 
 def load_attitude_parameters(fhandle):
@@ -246,7 +251,7 @@ def load_attitude_parameters(fhandle):
         system to geographic coordinate system, matrix elements from geographic
         coordinate system to local geomagnetic coordinate system, quality
         index of attitude parameters.
-    meta : dict
+    meta_dict : dict
         Dictionary with meta data for keys: 'software processing version',
         'software processing subversion', 'data names', 'data units'
 
@@ -288,13 +293,13 @@ def load_attitude_parameters(fhandle):
     data_names.append('attitude_flag')
     data_units[data_names[-1]] = 'unitless'
 
-    meta = {'software processing version': int(codecs.encode(chunk[74:75],
-                                                             'hex'), 16),
-            'software processing subversion': int(codecs.encode(chunk[75:76],
-                                                                'hex'), 16),
-            'data names': data_names, 'data units': data_units}
+    meta_dict = {'software processing version': int(codecs.encode(chunk[74:75],
+                                                                  'hex'), 16),
+                 'software processing subversion':
+                 int(codecs.encode(chunk[75:76], 'hex'), 16),
+                 'data names': data_names, 'data units': data_units}
 
-    return data, meta
+    return data, meta_dict
 
 
 def load_binary_file(fname, load_experiment_data):
@@ -311,17 +316,17 @@ def load_binary_file(fname, load_experiment_data):
     ----------
     data : np.array
         Data from file stored in a numpy array
-    meta : dict
+    meta_dict : dict
         Meta data for file, including data names and units
 
     """
 
     data = list()
-    meta = dict()
+    meta_dict = dict()
 
     with open(fname, "rb") as f:
         # Cycle through teach time, which consists of four blocks
-        gdata, meta = load_general_header(f)
+        gdata, meta_dict = load_general_header(f)
 
         while len(gdata) > 0:
             ldata, lmeta = load_location_parameters(f)
@@ -330,18 +335,18 @@ def load_binary_file(fname, load_experiment_data):
 
             # Combine and save the meta data
             if len(data) == 0:
-                meta['data names'].extend(lmeta['data names'])
-                meta['data units'].update(lmeta['data units'])
-                meta['data names'].extend(ameta['data names'])
-                meta['data units'].update(ameta['data units'])
+                meta_dict['data names'].extend(lmeta['data names'])
+                meta_dict['data units'].update(lmeta['data units'])
+                meta_dict['data names'].extend(ameta['data names'])
+                meta_dict['data units'].update(ameta['data units'])
 
                 for ekey in emeta.keys():
                     if ekey == 'data names':
-                        meta[ekey].extend(emeta[ekey])
+                        meta_dict[ekey].extend(emeta[ekey])
                     elif ekey == 'data units':
-                        meta[ekey].update(emeta[ekey])
+                        meta_dict[ekey].update(emeta[ekey])
                     else:
-                        meta[ekey] = emeta[ekey]
+                        meta_dict[ekey] = emeta[ekey]
 
             # Combine and save the data
             gdata.extend(ldata)
@@ -356,7 +361,7 @@ def load_binary_file(fname, load_experiment_data):
         f.close()
         data = np.array(data)
 
-    return data, meta
+    return data, meta_dict
 
 
 def set_refs(name):
@@ -604,7 +609,8 @@ def set_metadata(name, meta_dict):
                 ll = long_name[cc]
 
             # Assign the data units, long names
-            meta[cc] = {'units': meta_dict['data units'][cc], 'long_name': ll}
+            meta[cc] = {meta.labels.units: meta_dict['data units'][cc],
+                        meta.labels.name: ll}
 
         mkeys = list(meta_dict.keys())
         mkeys.pop(mkeys.index('data names'))
