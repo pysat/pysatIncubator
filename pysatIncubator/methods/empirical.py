@@ -58,8 +58,8 @@ def add_iri_thermal_plasma(inst, glat_label='glat', glong_label='glong',
     Example
     -------
         # function added velow modifies the inst object upon every inst.load
-        call inst.custom.attach(add_iri_thermal_plasma,
-        kwargs={'glat_label': 'custom_label'})
+        inst.custom_attach(add_iri_thermal_plasma,
+                           kwargs={'glat_label': 'custom_label'})
 
     """
 
@@ -142,7 +142,7 @@ def add_igrf(inst, glat_label='glat', glong_label='glong', alt_label='alt'):
     Example
     -------
         # function added velow modifies the inst object upon every inst.load
-        call inst.custom.attach(add_igrf, kwargs={'glat_label': 'custom_label'})
+        inst.custom_attach(add_igrf, kwargs={'glat_label': 'custom_label'})
 
     """
 
@@ -242,7 +242,7 @@ def add_msis(inst, glat_label='glat', glong_label='glong', alt_label='alt'):
     Example
     -------
         # function added velow modifies the inst object upon every inst.load
-        call inst.custom.attach(add_msis, kwargs={'glat_label': 'custom_label'})
+        inst.custom_attach(add_msis, kwargs={'glat_label': 'custom_label'})
 
     """
 
@@ -340,8 +340,8 @@ def add_hwm_winds_and_ecef_vectors(inst, glat_label='glat',
     Example
     -------
         # function added velow modifies the inst object upon every inst.load
-        call inst.custom.attach(add_hwm_winds_and_ecef_vectors,
-        kwargs={'glat_label': 'custom_label'})
+        inst.custom_attach(add_hwm_winds_and_ecef_vectors,
+                           kwargs={'glat_label': 'custom_label'})
 
     """
 
@@ -447,7 +447,7 @@ def project_hwm_onto_sc(inst):
     Example
     -------
         # function added velow modifies the inst object upon every inst.load
-        call inst.custom.attach(project_hwm_onto_sc)
+        call inst.custom_attach(project_hwm_onto_sc)
 
     """
 

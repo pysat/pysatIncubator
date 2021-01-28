@@ -25,7 +25,7 @@ class TestBasics():
 
     def test_add_iri_thermal_plasma(self):
         """Test adding thermal plasma data to test inst"""
-        self.testInst.custom.attach(mm_emp.add_iri_thermal_plasma,
+        self.testInst.custom_attach(mm_emp.add_iri_thermal_plasma,
                                     kwargs={'glat_label': 'latitude',
                                             'glong_label': 'longitude',
                                             'alt_label': 'altitude'})
@@ -41,7 +41,7 @@ class TestBasics():
 
     def test_add_igrf(self):
         """Test adding igrf model to test inst"""
-        self.testInst.custom.attach(mm_emp.add_igrf,
+        self.testInst.custom_attach(mm_emp.add_igrf,
                                     kwargs={'glat_label': 'latitude',
                                             'glong_label': 'longitude',
                                             'alt_label': 'altitude'})
@@ -57,7 +57,7 @@ class TestBasics():
 
     def test_add_msis(self):
         """Test adding msis model to test inst"""
-        self.testInst.custom.attach(mm_emp.add_msis,
+        self.testInst.custom_attach(mm_emp.add_msis,
                                     kwargs={'glat_label': 'latitude',
                                             'glong_label': 'longitude',
                                             'alt_label': 'altitude'})
