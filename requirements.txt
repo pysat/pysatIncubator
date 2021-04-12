@@ -3,3 +3,4 @@ numpy
 pandas
 xarray
 pysat>= 3.0
+pysatMagVect
