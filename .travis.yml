@@ -2,7 +2,6 @@ language: python
 dist: xenial
 matrix:
   include:
-    - python: 3.6
     - python: 3.7
 
 services: xvfb
@@ -33,11 +32,7 @@ install:
   - pip install coveralls
   - pip install pytest-flake8
   # Custom pysat install
-  - cd ..
-  - git clone https://github.com/pysat/pysat.git
-  - cd pysat
-  - git checkout develop-3
-  - python setup.py install
+  - pip install pysat>=3.0
   - export PYTHONPATH=$PYTHONPATH:$(pwd)
 
   # Install pysatMagVect after pysat
@@ -45,7 +40,6 @@ install:
 
   # set up data directory
   - mkdir /home/travis/build/pysatData
-  - cd ../pysatIncubator
   # install pysatIncubator
   - python setup.py install
 
