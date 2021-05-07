@@ -1,5 +1,5 @@
 # pysatIncubator: pysat development lab for instruments
-[![Build Status](https://travis-ci.org/pysat/pysatIncubator.svg?branch=main)](https://travis-ci.org/pysat/pysatIncubator)
+[![Build Status](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/pysat/pysatIncubator/badge.svg?branch=main)](https://coveralls.io/github/pysat/pysatIncubator?branch=main)
 [![DOI](https://zenodo.org/badge/287392599.svg)](https://zenodo.org/badge/latestdoi/287392599)
 
