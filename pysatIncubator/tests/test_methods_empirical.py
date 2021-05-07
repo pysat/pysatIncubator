@@ -14,8 +14,8 @@ from pysatIncubator.methods import empirical as mm_emp
 class TestBasics():
     def setup(self):
         """Runs before every method to create a clean testing setup."""
-        if (os.environ.get('TRAVIS') == 'true'):
-            pytest.skip('pyglow tests skipped on Travis CI')
+        if (os.environ.get('CI') == 'true'):
+            pytest.skip('pyglow tests skipped on CI')
         self.testInst = pysat.Instrument(platform='pysat', name='testing',
                                          inst_id='100', clean_level='clean')
 
