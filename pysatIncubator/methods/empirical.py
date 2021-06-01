@@ -10,11 +10,11 @@ import warnings
 
 try:
     from pyglow.pyglow import Point
+    import pysatMagVect
 except ImportError:
     # Warnings thrown elsewhere if users call relevant functions without
     # pyglow installed
     pass
-import pysatMagVect
 
 
 # TODO add checks for ECEF and import rest of changes here
