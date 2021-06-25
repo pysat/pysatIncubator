@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: [3.8, 3.9]
         numpy_ver: [latest]
         include:
@@ -33,6 +33,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r test_requirements.txt
         pip install -r requirements.txt;
+
+        # Temporary install commands to test RC
+        pip install -r pysat_requirements.txt
+        pip install -i https://test.pypi.org/simple/ pysat==3.0.1rc1
 
     - name: Install NEP29 dependencies
       if: ${{ matrix.numpy_ver != 'latest'}}
