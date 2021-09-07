@@ -77,5 +77,5 @@ class TestInstruments(InstTestClass):
 
         pysat.params.data['data_dirs'] = self.saved_path
         self.tempdir.cleanup()
-        del self.inst_loc, self.saved_path, self.tempdir, self.stime
+        del self.inst_loc, self.saved_path, self.tempdir
         return
