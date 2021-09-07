@@ -17,7 +17,7 @@ class TestBasics():
         if (os.environ.get('CI') == 'true'):
             pytest.skip('pyglow tests skipped on CI')
         self.testInst = pysat.Instrument(platform='pysat', name='testing',
-                                         inst_id='100', clean_level='clean')
+                                         num_samples=100, clean_level='clean')
 
     def teardown(self):
         """Clean up test environment after tests"""
