@@ -89,4 +89,3 @@ class TestBasics():
             assert target in self.testInst.meta.data.index
         return
 
-    # TODO: Add hwm tests once routine is generalized
