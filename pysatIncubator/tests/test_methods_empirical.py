@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Test some of the pyglow method functions
+"""Test some of the pyglow method functions."""
 
 import datetime as dt
 import numpy as np
@@ -12,19 +12,32 @@ from pysatIncubator.methods import empirical as mm_emp
 
 
 class TestBasics():
+    """Main unit tests for pyglow methods to add empirical models.
+
+    Note
+    ----
+    Currently skipped in CI environments due to issues with installing pyglow
+    on github actions.
+    """
+
     def setup(self):
-        """Runs before every method to create a clean testing setup."""
+        """Create a clean testing setup before each method."""
+
         if (os.environ.get('CI') == 'true'):
             pytest.skip('pyglow tests skipped on CI')
         self.testInst = pysat.Instrument(platform='pysat', name='testing',
-                                         inst_id='100', clean_level='clean')
+                                         num_samples=100, clean_level='clean')
+        return
 
     def teardown(self):
-        """Clean up test environment after tests"""
+        """Clean up test environment after each method."""
+
         del self
+        return
 
     def test_add_iri_thermal_plasma(self):
-        """Test adding thermal plasma data to test inst"""
+        """Test adding thermal plasma data to test inst."""
+
         self.testInst.custom_attach(mm_emp.add_iri_thermal_plasma,
                                     kwargs={'glat_label': 'latitude',
                                             'glong_label': 'longitude',
@@ -38,9 +51,11 @@ class TestBasics():
             assert not np.isnan(self.testInst[target]).any()
             # Check if metadata is added
             assert target in self.testInst.meta.data.index
+        return
 
     def test_add_igrf(self):
-        """Test adding igrf model to test inst"""
+        """Test adding igrf model to test inst."""
+
         self.testInst.custom_attach(mm_emp.add_igrf,
                                     kwargs={'glat_label': 'latitude',
                                             'glong_label': 'longitude',
@@ -54,9 +69,11 @@ class TestBasics():
             assert not np.isnan(self.testInst[target]).any()
             # Check if metadata is added
             assert target in self.testInst.meta.data.index
+        return
 
     def test_add_msis(self):
-        """Test adding msis model to test inst"""
+        """Test adding msis model to test inst."""
+
         self.testInst.custom_attach(mm_emp.add_msis,
                                     kwargs={'glat_label': 'latitude',
                                             'glong_label': 'longitude',
@@ -70,5 +87,4 @@ class TestBasics():
             assert not np.isnan(self.testInst[target]).any()
             # Check if metadata is added
             assert target in self.testInst.meta.data.index
-
-    # TODO: Add hwm tests once routine is generalized
+        return
