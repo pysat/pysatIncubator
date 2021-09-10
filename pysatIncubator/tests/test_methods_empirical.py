@@ -88,4 +88,3 @@ class TestBasics():
             # Check if metadata is added
             assert target in self.testInst.meta.data.index
         return
-
